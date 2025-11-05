@@ -1,7 +1,7 @@
 import pandas as pd, json, datetime as datetime
 
 #loaod JSONL
-df = pd.read_json("cloudtrail.json, lines=True")
+df = pd.read_json("cloudtrail.json", lines=True)
 df = df[df["eventName"]=="consoleLogin"].copy()
 df["ok"] = df["responseElements"].apply(lambda x: (x or {}).get("consoleLogin")=="Success")
 df["ts"] = pd.to_datetime(df["eveentTime"])
